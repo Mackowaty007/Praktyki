@@ -22,49 +22,48 @@
   //points
   var points = 0;
   //player
-  var size = 10;
   var x = 0;
   var y = 0;
 
   //enemy
-  ex = Math.floor(Math.random()*canv.width/size + 1)
-  ex *= size
-  ex -= size
-  ey = Math.floor(Math.random()*canv.height/size + 1)
-  ey *= size
-  ey -= size
+  ex = Math.floor(Math.random()*canv.width/gridSizeX + 1)
+  ex *= gridSizeX
+  ex -= gridSizeX
+  ey = Math.floor(Math.random()*canv.height/gridSizeY + 1)
+  ey *= gridSizeY
+  ey -= gridSizeY
 
   draw();
 //input
   function keyPush(evt){
     switch(evt.keyCode){
       case 37:
-        x -= size
+        x -= gridSizeX
         if (x<0){
-          x=canv.width-size
+          x=canv.width-gridSizeX
         }
         points()
         draw()
         break
       case 38:
-        y -= size
+        y -= gridSizeY
         if (y<0){
-          y=canv.width-size
+          y=canv.width-gridSizeY
         }
         points()
         draw()
         break
       case 39:
-        x += size
-        if (x>canv.width-size){
+        x += gridSizeX
+        if (x>canv.width-gridSizeX){
           x=0
         }
         points()
         draw()
         break
       case 40:
-        y += size
-        if (y>canv.height-size){
+        y += gridSizeY
+        if (y>canv.height-gridSizeY){
           y=0
         }
         points()
@@ -102,19 +101,19 @@
     xp = 0
     //draw Player
     ctx.fillStyle = "green"
-    ctx.fillRect(x,y,size,size)
+    ctx.fillRect(x,y,gridSizeX,gridSizeY)
     //draw Enemy
     ctx.fillStyle = "red"
-    ctx.fillRect(ex,ey,size,size)
+    ctx.fillRect(ex,ey,gridSizeX,gridSizeY)
   }
 
   //enemy spawn after death
   function EnemySpawn(){
-    ex = Math.floor(Math.random()*canv.width/size + 1)
-    ex *= size
-    ex -= size
-    ey = Math.floor(Math.random()*canv.height/size + 1)
-    ey *= size
-    ey -= size
+    ex = Math.floor(Math.random()*canv.width/gridSizeX + 1)
+    ex *= gridSizeX
+    ex -= gridSizeX
+    ey = Math.floor(Math.random()*canv.height/gridSizeY + 1)
+    ey *= gridSizeY
+    ey -= gridSizeY
   }
 </script>
