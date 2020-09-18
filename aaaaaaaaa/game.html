@@ -1,0 +1,120 @@
+<title>AAAAAA</title>
+<meta charset = "utf-8"></meta>
+<canvas id="gameScreen" width="500" height="500"></canvas>
+<style>
+#gameScreen{
+  border: 1px solid black;
+}
+</style>
+<script>
+  //setup
+  canv = document.getElementById("gameScreen");
+  ctx = canv.getContext("2d");
+  document.addEventListener("keydown",keyPush);
+//variable declaration
+  //making a grid
+  var gridSizeX = 10;
+  var gridSizeY = 10;
+  //x pointer
+  var xp = 0;
+  var yp = 0;
+
+  //points
+  var points = 0;
+  //player
+  var size = 10;
+  var x = 0;
+  var y = 0;
+
+  //enemy
+  ex = Math.floor(Math.random()*canv.width/size + 1)
+  ex *= size
+  ex -= size
+  ey = Math.floor(Math.random()*canv.height/size + 1)
+  ey *= size
+  ey -= size
+
+  draw();
+//input
+  function keyPush(evt){
+    switch(evt.keyCode){
+      case 37:
+        x -= size
+        if (x<0){
+          x=canv.width-size
+        }
+        points()
+        draw()
+        break
+      case 38:
+        y -= size
+        if (y<0){
+          y=canv.width-size
+        }
+        points()
+        draw()
+        break
+      case 39:
+        x += size
+        if (x>canv.width-size){
+          x=0
+        }
+        points()
+        draw()
+        break
+      case 40:
+        y += size
+        if (y>canv.height-size){
+          y=0
+        }
+        points()
+        draw()
+        break
+    }
+    //points
+    function points(){
+      if (ex == x && ey == y){
+        points += 1;
+        EnemySpawn()
+      }
+    }
+  }
+  function draw(){
+    //clear background
+    ctx.clearRect(0,0,canv.width,canv.height)
+    //grid drawing
+    while (yp<800){
+      while (xp<800){
+        //draw grid
+        ctx.fillStyle = "#ffcea1"
+        ctx.fillRect(xp,yp,gridSizeX,gridSizeY);
+        xp += gridSizeX * 2;
+      }
+      yp += gridSizeY
+      if (yp % (2*gridSizeY) == 0){
+        xp=0
+      }
+      else{
+        xp = gridSizeX
+      }
+    }
+    yp = 0
+    xp = 0
+    //draw Player
+    ctx.fillStyle = "green"
+    ctx.fillRect(x,y,size,size)
+    //draw Enemy
+    ctx.fillStyle = "red"
+    ctx.fillRect(ex,ey,size,size)
+  }
+
+  //enemy spawn after death
+  function EnemySpawn(){
+    ex = Math.floor(Math.random()*canv.width/size + 1)
+    ex *= size
+    ex -= size
+    ey = Math.floor(Math.random()*canv.height/size + 1)
+    ey *= size
+    ey -= size
+  }
+</script>
