@@ -1,0 +1,32 @@
+<head><link href="iconShip.png">
+<title>SpaceShootEmUp</title>
+<meta charset = "utf-8"></meta>
+</head>
+<canvas id="gameScreen" width="800" height="800"></canvas>
+<style>
+  #gameScreen{
+    border: 2px solid black
+  }
+</style>
+<script src="script.js"></script>
+<body>
+  <br>
+  <table>
+    <tr>
+      <th><input type="Button" value="red" onClick="brushColor('Red')"></th>
+      <th><input type="Button" value="green" onClick="brushColor('green')"></th>
+      <th><input type="Button" value="blue" onClick="brushColor('blue')"></th>
+      <th><input type="Button" value="white" onClick="brushColor('white')"></th>
+      <th><input type="Button" value="black" onClick="brushColor('black')"></th>
+      <th><input type="Button" value="lime" onClick="brushColor('lime')"></th>
+    </tr>
+    <tr>
+      <td><input type="button" value="fill" onClick="fill('red')"></td>
+      <td><input type="button" value="fill" onClick="fill('green')"></td>
+      <td><input type="button" value="fill" onClick="fill('blue')"></td>
+      <td><input type="button" value="fill" onClick="fill('white')"></td>
+      <td><input type="button" value="fill" onClick="fill('black')"></td>
+      <td><input type="button" value="fill" onClick="fill('lime')"></td>
+    </tr>
+  </table>
+</body>
