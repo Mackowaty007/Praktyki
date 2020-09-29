@@ -1,7 +1,7 @@
 //setup
 canv = document.getElementById("gameScreen")
 ctx = canv.getContext("2d")
-const playerShip = document.getElementById('source')
+var playerShip = document.getElementById('playerShip')
 const fireball = document.getElementById('fireball')
 const space = document.getElementById('space')
 var enemyShip = document.getElementById('enemyShip')
@@ -14,12 +14,26 @@ class EnemyClass{
   }
   colision(){
     if(this.x < fireball1.x + fireballSize && this.x + enemySize > fireball1.x && this.y > fireball1.y - enemySize && this.y < fireball1.y + fireballSize/*|| this.x < fireball2.x || this.x < fireball3.x*/){
-      enemyShip = document.getElementById('explosion')
-      setTimeout(function(){alert("you Lose :()")},500)
+      points ++;
+      fireball1.x = -fireballSize;
+      enemyShip = document.getElementById('explosion');
+      setTimeout(function(){
+        enemyShip = document.getElementById('enemyShip');
+        enemy1.y = 0 - enemySize;
+        enemy1.x = Math.floor(Math.random()*(canv.width - enemySize)+10);
+      },300)
+    }
+    if(this.x < x + playerSize && this.x + enemySize > x && this.y > y - enemySize && this.y < y + playerSize){
+      playerShip = document.getElementById("explosion")
+      enemyShip = document.getElementById("explosion")
+      setTimeout(function(){alert("you tried to dock to the enemy ship(It doesnt work when you are flying at each other at this speed)")},600)
     }
   }
   move(){
     this.y += enemySpeed;
+    if(this.y > canv.height){
+      alert("you let the enemy into our teritory")
+    }
   }
 }
 
@@ -34,9 +48,9 @@ class FireballClass{
    }
 }
 //variables
-const playerSize = 100;
-const fireballSize = 40;
-const enemySize = 90;
+const playerSize = 70;
+const fireballSize = 20;
+const enemySize = 60;
 var enemySpeed = 1
 var x = (canv.width / 2) - (playerSize /2);
 var y = canv.height - playerSize;
@@ -46,6 +60,7 @@ var fireball1;
 var fireballSpeed = 1;
 var enemy1;
 //var enemy2;
+var points;
 
 fireball1 = new FireballClass;
 //fireball2 = new FireballClass;
@@ -60,10 +75,10 @@ window.addEventListener('click',function(e){
   fireball1.y = y - 10;
 })
 function gameLoop(){
-  draw()
   fireball1.projectile()
   enemy1.move()
   enemy1.colision()
+  draw()
 }
 
 function draw(){
