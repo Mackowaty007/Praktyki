@@ -9,13 +9,14 @@ iy = 0
 verteceX = 0
 verteceY = 0
 offset = 450
-squareSize = 
+squareSize = 5
+vectorNumber = 50 / 2 // the number  of vectors in a line. The total number of vectors drawn will be vectorNumber * vectorNumver
 
 ctx.lineWidth = 2
 
 window.addEventListener("mousemove",function(e){
-    x = (e.x - offset)
-    y = (e.y - offset) 
+    x = (e.x - offset - 10)
+    y = (e.y - offset - 10) 
 })
 document.addEventListener("keydown",function(e){
     switch(e.keyCode){
@@ -50,12 +51,12 @@ function main(){
 
 
     ctx.fillStyle = "green"
-    for(i=-10;i<10;i++){
-        for(u=-10;u<10;u++){
+    for(i=-vectorNumber;i<vectorNumber;i++){
+        for(u=-vectorNumber;u<vectorNumber;u++){
             verteceX = (x*i + ix * u) + offset
             verteceY = (y*i + iy * u) + offset
 
-            ctx.fillRect (verteceX,verteceY,10,10)
+            ctx.fillRect (verteceX-squareSize/2,verteceY-squareSize/2,squareSize,squareSize)
         }
     }
 }
